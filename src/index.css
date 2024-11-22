@@ -6,3 +6,6 @@
     --radius: 0.5rem
   }
 }
+.reviewScrollBar::-webkit-scrollbar{
+    scrollbar-width: none;
+}
