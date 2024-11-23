@@ -7,11 +7,32 @@ import { shoppingViewHeaderMenuItems } from "@/config";
 import { DropdownMenu,DropdownMenuLabel, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuItem } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { logoutUser } from "@/store/auth";
+import UserCartWrapper from "./cart-wrapper";
+import { useEffect, useState } from "react";
+import { fetchCartItems } from "@/store/shop/cart-slice";
+import { Label } from "../ui/label";
 
 function MenuItems() {
+
+    const navigate = useNavigate()
+    
+    function handleNavigateToListingPage(item) {
+        sessionStorage.removeItem("filters");
+        const currentFilter = item.id !== "home" && { category: [item.id] };
+        if (currentFilter) sessionStorage.setItem("filters", JSON.stringify(currentFilter));
+        navigate(item.path);
+      }
+
     return <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
         {
-            shoppingViewHeaderMenuItems.map((item) => <Link className="text-sm font-medium" to={item.path} key={item.id} >{item.label}</Link> )
+            shoppingViewHeaderMenuItems.map((item) =>(
+            <Label 
+                className="text-sm cursor-pointer font-medium" 
+                onClick={() => handleNavigateToListingPage(item)}
+                key={item.id} 
+            >
+                {item.label}
+            </Label>) )
         }
 
     </nav>
@@ -24,15 +45,32 @@ function HeaderRightContent(){
     const {user} = useSelector((state) => state.auth)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [openCartSheet, setOpenCartSheet] = useState(false)
+    const {cartItems} = useSelector(state => state.shoppingCart)
+
     const handleLogout = () => {
         dispatch(logoutUser())
     }
 
+    useEffect(() => {
+        dispatch(fetchCartItems(user.id))
+    }, [dispatch])
+
     return <div className="flex lg:items-center lg:flex-row flexcol gap-4">
-        <Button variant="outline" size="icon">
+        <Sheet
+            open={openCartSheet}
+            onOpenChange={() => setOpenCartSheet(false)}
+        >
+        <Button 
+            variant="outline" 
+            size="icon"
+            onClick={() => setOpenCartSheet(true)}
+        >
             <ShoppingCart className="h-6 w-6" />
             <span className="sr-only">User Cart</span>
         </Button>
+        <UserCartWrapper cartItems={cartItems && cartItems.items && cartItems.items.length > 0 ? cartItems.items : []} />
+        </Sheet>
         <DropdownMenu>
             <DropdownMenuTrigger  asChild>
                 <Avatar className="bg-black">

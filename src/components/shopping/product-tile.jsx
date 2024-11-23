@@ -3,7 +3,7 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter } from "../ui/card";
 
-function ShoppingProductTile({product , handleGetProdctDetails}) {
+function ShoppingProductTile({product , handleGetProdctDetails , handleAddToCart}) {
     return ( 
         <Card className="w-full max-w-sm mx-auto">
             <div onClick={() => handleGetProdctDetails(product?._id)}>
@@ -14,7 +14,7 @@ function ShoppingProductTile({product , handleGetProdctDetails}) {
                         src={product?.image} 
                         alt={product?.title} 
                     />
-                    {
+                    { 
                         product?.salePrice > 0 ? <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600" >Sale</Badge> : null
                     }
                 </div>
@@ -34,10 +34,10 @@ function ShoppingProductTile({product , handleGetProdctDetails}) {
                     </div>
 
                 </CardContent>
-                <CardFooter>
-                    <Button className="w-full ">Add to cart</Button>
-                </CardFooter>
             </div>
+                <CardFooter>
+                    <Button onClick={() => handleAddToCart(product?._id) } className="w-full ">Add to cart</Button>
+                </CardFooter>
 
         </Card>
      );
