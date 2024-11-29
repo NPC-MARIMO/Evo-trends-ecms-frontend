@@ -2,11 +2,11 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 
-function ShoppingOrders() {
+function AdminOrdersView() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Order History</CardTitle>
+        <CardTitle>All Order</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -23,13 +23,13 @@ function ShoppingOrders() {
           </TableHeader>
           <TableBody>
             <TableRow>
-                <TableCell>123456</TableCell>
-                <TableCell>01/12/2024</TableCell>
-                <TableCell>Dispatched</TableCell>
-                <TableCell>$100</TableCell>
-                <TableCell>
-                    <Button>View Details</Button>
-                </TableCell>
+              <TableCell>123456</TableCell>
+              <TableCell>01/12/2024</TableCell>
+              <TableCell>Dispatched</TableCell>
+              <TableCell>$100</TableCell>
+              <TableCell>
+                <Button>View Details</Button>
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -38,4 +38,4 @@ function ShoppingOrders() {
   );
 }
 
-export default ShoppingOrders;
+export default AdminOrdersView;
