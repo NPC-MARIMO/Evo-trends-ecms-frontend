@@ -18,7 +18,7 @@ export const addNewAddress = createAsyncThunk(
   }
 );
 
-export const fetchAllAddress = createAsyncThunk(
+export const fetchAllAddresses = createAsyncThunk(
   "/addresses/fetchAllAddresses",
   async (userId) => {
     const response = await axios.get(
@@ -29,7 +29,7 @@ export const fetchAllAddress = createAsyncThunk(
   }
 );
 
-export const editAddress = createAsyncThunk(
+export const editaAddress = createAsyncThunk(
   "/addresses/editaAddress",
   async ({ userId, addressId, formData }) => {
     const response = await axios.put(
@@ -67,14 +67,14 @@ const addressSlice = createSlice({
       .addCase(addNewAddress.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(fetchAllAddress.pending, (state) => {
+      .addCase(fetchAllAddresses.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchAllAddress.fulfilled, (state, action) => {
+      .addCase(fetchAllAddresses.fulfilled, (state, action) => {
         state.isLoading = false;
         state.addressList = action.payload.data;
       })
-      .addCase(fetchAllAddress.rejected, (state) => {
+      .addCase(fetchAllAddresses.rejected, (state) => {
         state.isLoading = false;
         state.addressList = [];
       });
