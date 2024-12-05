@@ -60,7 +60,7 @@ export const checkAuth = createAsyncThunk(
 
   async () => {
     const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/auth/check-aut`,
+      `${import.meta.env.VITE_API_URL}/api/auth/check-auth`,
       {
         withCredentials: true,
         headers: {
