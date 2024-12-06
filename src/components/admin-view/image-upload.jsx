@@ -80,7 +80,7 @@ function ProductImageUpload({
         <Input
           id="image-upload"
           type="file"
-          className="hidden"
+          className="hidden overflow-hidden"
           ref={inputRef}
           onChange={handleImageFileChange}
           disabled={isEditMode}
