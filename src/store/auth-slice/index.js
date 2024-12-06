@@ -32,6 +32,11 @@ export const loginUser = createAsyncThunk(
       formData,
       {
         withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+        credentials: "include"
       }
     );
 
@@ -78,7 +83,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action) => {},
+    setUser: (state, action) => { },
   },
   extraReducers: (builder) => {
     builder
