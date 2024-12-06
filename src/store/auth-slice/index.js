@@ -32,11 +32,6 @@ export const loginUser = createAsyncThunk(
       formData,
       {
         withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        credentials: "include"
       }
     );
 
