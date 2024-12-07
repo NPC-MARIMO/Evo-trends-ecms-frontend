@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import AuthLayout from "./components/auth/layout";
 import AuthLogin from "./pages/auth/login";
 import AuthRegister from "./pages/auth/register";
@@ -34,6 +34,12 @@ function App() {
   }, [dispatch]);
 
   if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    navigate("/")
+  }, [navigate])
 
   console.log(isLoading, user);
 
