@@ -22,8 +22,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
+import ShoppingTracking from "./pages/shopping-view/tracking";
 import TermsAndConditions from "./pages/common/TandCs";
 import PrivacyPolicy from "./pages/common/PrivacyPolicy";
+
+// The tracking page is located at "/shop/tracking" route.
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector(
@@ -42,14 +45,14 @@ function App() {
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       <Routes>
-      <Route path="privacy-policy" element={<PrivacyPolicy />} />
-      <Route path="terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="terms-and-conditions" element={<TermsAndConditions />} />
         <Route
           path="/"
           element={
             <CheckAuth
-            isAuthenticated={isAuthenticated}
-            user={user}
+              isAuthenticated={isAuthenticated}
+              user={user}
             ></CheckAuth>
           }
         />
@@ -92,6 +95,8 @@ function App() {
           <Route path="paypal-return" element={<PaypalReturnPage />} />
           <Route path="payment-success" element={<PaymentSuccessPage />} />
           <Route path="search" element={<SearchProducts />} />
+          {/* The tracking page is here: */}
+          <Route path="tracking" element={<ShoppingTracking />} />
         </Route>
         <Route path="/unauth-page" element={<UnauthPage />} />
         <Route path="*" element={<NotFound />} />

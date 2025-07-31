@@ -1,4 +1,4 @@
-import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
+import { HousePlug, LogOut, Menu, ShoppingCart, UserCog, Truck } from "lucide-react";
 import {
   Link,
   useLocation,
@@ -120,6 +120,10 @@ function HeaderRightContent() {
           <DropdownMenuItem onClick={() => navigate("/shop/account")}>
             <UserCog className="mr-2 h-4 w-4" />
             Account
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => navigate("/shop/tracking")}>
+            <Truck className="mr-2 h-4 w-4" />
+            Track Orders
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout}>
