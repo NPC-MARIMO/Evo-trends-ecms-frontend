@@ -152,6 +152,8 @@ function TrackingComponent() {
     }
   };
 
+  // console.log(orderList,'asaorderlist')
+
   return (
     <div className="space-y-6">
       <Card>
@@ -173,6 +175,7 @@ function TrackingComponent() {
           ) : (
             <div className="space-y-4">
               {orderList.map((order) => (
+                
                 <div
                   key={order._id}
                   className="flex flex-col md:flex-row md:items-center justify-between p-4 border rounded-lg gap-2"
@@ -183,6 +186,11 @@ function TrackingComponent() {
                       <div className="font-semibold text-base">
                         Order ID: <span className="font-mono">{order._id}</span>
                       </div>
+                      {/* Render order name here */}
+                      <div className="text-sm text-gray-800 font-medium">
+                        Name:{" "}
+                        {order?.cartItems[0].title ? `${order.cartItems[0].title}` : "hello"}
+                      </div> 
                       <div className="text-sm text-gray-600">
                         Date: {order.orderDate ? order.orderDate.split("T")[0] : "N/A"}
                       </div>
