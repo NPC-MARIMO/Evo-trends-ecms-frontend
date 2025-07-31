@@ -22,30 +22,34 @@ import { Skeleton } from "@/components/ui/skeleton";
 import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
+import TermsAndConditions from "./pages/common/TandCs";
+import PrivacyPolicy from "./pages/common/PrivacyPolicy";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector(
     (state) => state.auth
   );
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
-
+  
   if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
-
+  
   console.log(isLoading, user);
-
+  
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       <Routes>
+      <Route path="privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="terms-and-conditions" element={<TermsAndConditions />} />
         <Route
           path="/"
           element={
             <CheckAuth
-              isAuthenticated={isAuthenticated}
-              user={user}
+            isAuthenticated={isAuthenticated}
+            user={user}
             ></CheckAuth>
           }
         />
