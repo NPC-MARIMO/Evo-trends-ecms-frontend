@@ -201,7 +201,7 @@ function TrackingComponent() {
                       {order.orderStatus}
                     </Badge>
                     <div className="text-sm text-gray-700">
-                      Total: ${order.totalAmount}
+                      Total: ₹{order.totalAmount}
                     </div>
                     {order.orderStatus?.toLowerCase() === "pending" && (
                       <Button
