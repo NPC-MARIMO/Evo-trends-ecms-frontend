@@ -58,11 +58,11 @@ export const addProductFormElements = [
     name: "category",
     componentType: "select",
     options: [
-      { id: "men", label: "Men" },
-      { id: "women", label: "Women" },
-      { id: "kids", label: "Kids" },
-      { id: "accessories", label: "Accessories" },
-      { id: "footwear", label: "Footwear" },
+      { id: "smart-watch", label: "Smart watch" },
+      { id: "safayar-full-lower", label: "Safayar Full Lower" },
+      { id: "leather-belt", label: "Leather Belt" },
+      { id: "self-adhesive-tape", label: "Self Adhesive-Tape" },
+      { id: "3-inch-50-meter-transparent", label: "3 inch 50 meter Transparents" },
     ],
   },
   {
@@ -70,12 +70,7 @@ export const addProductFormElements = [
     name: "brand",
     componentType: "select",
     options: [
-      { id: "nike", label: "Nike" },
-      { id: "adidas", label: "Adidas" },
-      { id: "puma", label: "Puma" },
-      { id: "levi", label: "Levi's" },
-      { id: "zara", label: "Zara" },
-      { id: "h&m", label: "H&M" },
+      { id: "GHASHIRAM AND NATTHI LAL ENTERPRISES ", label: "GHASHIRAM AND NATTHI LAL ENTERPRISES " },
     ],
   },
   {
@@ -145,37 +140,28 @@ export const shoppingViewHeaderMenuItems = [
 ];
 
 export const categoryOptionsMap = {
-  men: "Men",
-  women: "Women",
-  kids: "Kids",
-  accessories: "Accessories",
-  footwear: "Footwear",
+  men: "Smart watch",
+  women: "Safayar Full Lower",
+  kids: "Leather Belt",
+  accessories: "Self Adhesive-Tape",
+  footwear: "3 inch 50 meter Transparents",
 };
 
 export const brandOptionsMap = {
-  nike: "Nike",
-  adidas: "Adidas",
-  puma: "Puma",
-  levi: "Levi",
-  zara: "Zara",
-  "h&m": "H&M",
+  nike: "GHASHIRAM AND NATTHI LAL ENTERPRISES",
+ 
 };
 
 export const filterOptions = {
   category: [
     { id: "men", label: "Men" },
     { id: "women", label: "Women" },
-    { id: "kids", label: "Kids" },
-    { id: "accessories", label: "Accessories" },
+    { id: "kids", label: "Leather Belt" },
+    { id: "accessories", label: "Self Adhesive-Tape" },
     { id: "footwear", label: "Footwear" },
   ],
   brand: [
-    { id: "nike", label: "Nike" },
-    { id: "adidas", label: "Adidas" },
-    { id: "puma", label: "Puma" },
-    { id: "levi", label: "Levi's" },
-    { id: "zara", label: "Zara" },
-    { id: "h&m", label: "H&M" },
+       { id: "GHASHIRAM AND NATTHI LAL ENTERPRISES ", label: "GHASHIRAM AND NATTHI LAL ENTERPRISES " },
   ],
 };
 
