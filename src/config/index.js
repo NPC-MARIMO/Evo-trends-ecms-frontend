@@ -108,30 +108,30 @@ export const shoppingViewHeaderMenuItems = [
   {
     id: "Jhumka",
     label: "Jhumka",
-    path: "/shop/home",
+    path: "/shop/listing?category=Jhumka",
   },
   {
     id: "Maang Teek",
     label: "Maang Teek",
-    path: "/shop/home",
+    path: "/shop/listing?category=Maang%20Teek",
   },
   {
     id: "Earings",
     label: "Earings",
-    path: "/shop/home",
+    path: "/shop/listing?category=Earings",
   },{
     id: "Necklace",
     label: "Necklace",
-    path: "/shop/home",
+    path: "/shop/listing?category=Necklace",
   },{
     id: "Pendant",
     label: "Pendant",
-    path: "/shop/home", 
+    path: "/shop/listing?category=Pendant", 
   },
   {
     id: "Ring",
     label: "Ring",
-    path: "/shop/home",
+    path: "/shop/listing?category=Ring",
   },
   {
     id: "search",

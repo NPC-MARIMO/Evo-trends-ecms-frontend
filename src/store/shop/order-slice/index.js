@@ -7,30 +7,34 @@ const initialState = {
   orderId: null,
   orderList: [],
   orderDetails: null,
+  razorpayOrder: null,
+  razorpayKeyId: null,
 };
 
-export const createNewOrder = createAsyncThunk(
-  "/order/createNewOrder",
-  async (orderData) => {
+// PayPal thunks removed
+
+// Razorpay: create an order on the server and return order details and key
+export const createRazorpayOrder = createAsyncThunk(
+  "/order/createRazorpayOrder",
+  async (payload) => {
+    // Backend expects order creation at /create and will return Razorpay fields
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/api/shop/order/create`,
-      orderData
+      payload
     );
 
     return response.data;
   }
 );
 
-export const capturePayment = createAsyncThunk(
-  "/order/capturePayment",
-  async ({ paymentId, payerId, orderId }) => {
+// Razorpay: verify payment on the server
+export const verifyRazorpayPayment = createAsyncThunk(
+  "/order/verifyRazorpayPayment",
+  async (payload) => {
+    // Use existing capturePayment/verify endpoint
     const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/shop/order/capture`,
-      {
-        paymentId,
-        payerId,
-        orderId,
-      }
+      `${import.meta.env.VITE_API_URL}/api/shop/order/verify`,
+      payload
     );
 
     return response.data;
@@ -69,23 +73,7 @@ const shoppingOrderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createNewOrder.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(createNewOrder.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.approvalURL = action.payload.approvalURL;
-        state.orderId = action.payload.orderId;
-        sessionStorage.setItem(
-          "currentOrderId",
-          JSON.stringify(action.payload.orderId)
-        );
-      })
-      .addCase(createNewOrder.rejected, (state) => {
-        state.isLoading = false;
-        state.approvalURL = null;
-        state.orderId = null;
-      })
+      // PayPal reducers removed
       .addCase(getAllOrdersByUserId.pending, (state) => {
         state.isLoading = true;
       })
@@ -107,6 +95,41 @@ const shoppingOrderSlice = createSlice({
       .addCase(getOrderDetails.rejected, (state) => {
         state.isLoading = false;
         state.orderDetails = null;
+      })
+      // Razorpay reducers
+      .addCase(createRazorpayOrder.pending, (state) => {
+        state.isLoading = true;
+        state.razorpayOrder = null;
+        state.razorpayKeyId = null;
+      })
+      .addCase(createRazorpayOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        // Map to state if needed by UI later
+        state.razorpayOrder = action.payload?.razorpayOrderId
+          ? { id: action.payload.razorpayOrderId, amount: action.payload?.amount, currency: action.payload?.currency }
+          : null;
+        state.razorpayKeyId = action.payload?.key || null;
+        state.orderId = action.payload?.orderId || state.orderId;
+        if (action.payload?.orderId) {
+          sessionStorage.setItem(
+            "currentOrderId",
+            JSON.stringify(action.payload.orderId)
+          );
+        }
+      })
+      .addCase(createRazorpayOrder.rejected, (state) => {
+        state.isLoading = false;
+        state.razorpayOrder = null;
+        state.razorpayKeyId = null;
+      })
+      .addCase(verifyRazorpayPayment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(verifyRazorpayPayment.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(verifyRazorpayPayment.rejected, (state) => {
+        state.isLoading = false;
       });
   },
 });

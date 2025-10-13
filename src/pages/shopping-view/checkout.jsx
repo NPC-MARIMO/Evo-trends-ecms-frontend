@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UserCartItemsContent from "@/components/shopping-view/cart-items-content";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { createNewOrder } from "@/store/shop/order-slice";
+import { createRazorpayOrder, verifyRazorpayPayment } from "@/store/shop/order-slice";
 import { Navigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { HomeHeroBg } from "@/assets";
@@ -13,7 +13,7 @@ function ShoppingCheckout() {
   const { user } = useSelector((state) => state.auth);
   const { approvalURL } = useSelector((state) => state.shopOrder);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
-  const [isPaymentStart, setIsPaymemntStart] = useState(false);
+  const [isRazorpayStarting, setIsRazorpayStarting] = useState(false);
   const dispatch = useDispatch();
   const { toast } = useToast();
 
@@ -32,8 +32,21 @@ function ShoppingCheckout() {
         )
       : 0;
 
-  function handleInitiatePaypalPayment() {
-    if (cartItems.length === 0) {
+  // Paypal removed
+
+  async function loadRazorpayScript() {
+    if (window.Razorpay) return true;
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  }
+
+  async function handleInitiateRazorpayPayment() {
+    if (!cartItems?.items || cartItems.items.length === 0) {
       toast({
         title: "Your cart is empty. Please add items to proceed",
         variant: "destructive",
@@ -49,6 +62,8 @@ function ShoppingCheckout() {
 
       return;
     }
+
+    setIsRazorpayStarting(true);
 
     const orderData = {
       userId: user?.id,
@@ -72,28 +87,86 @@ function ShoppingCheckout() {
         notes: currentSelectedAddress?.notes,
       },
       orderStatus: "pending",
-      paymentMethod: "paypal",
+      paymentMethod: "razorpay",
       paymentStatus: "pending",
       totalAmount: totalCartAmount,
       orderDate: new Date(),
       orderUpdateDate: new Date(),
-      paymentId: "",
-      payerId: "",
     };
 
-    dispatch(createNewOrder(orderData)).then((data) => {
-      console.log(data, "sangam");
-      if (data?.payload?.success) {
-        setIsPaymemntStart(true);
-      } else {
-        setIsPaymemntStart(false);
+    try {
+      const createRes = await dispatch(createRazorpayOrder(orderData));
+      const payload = createRes?.payload;
+      if (!payload?.success) {
+        setIsRazorpayStarting(false);
+        toast({ title: payload?.message || "Failed to start Razorpay", variant: "destructive" });
+        return;
       }
-    });
+
+      const loaded = await loadRazorpayScript();
+      if (!loaded) {
+        setIsRazorpayStarting(false);
+        toast({ title: "Razorpay SDK failed to load", variant: "destructive" });
+        return;
+      }
+
+      const { key, razorpayOrderId, amount, currency, orderId } = payload;
+
+      const options = {
+        key: key,
+        amount: amount,
+        currency: currency || "INR",
+        name: "Evo Trends",
+        description: "Order Payment",
+        order_id: razorpayOrderId,
+        prefill: {
+          name: user?.name || user?.fullName || "",
+          email: user?.email || "",
+          contact: currentSelectedAddress?.phone || "",
+        },
+        notes: {
+          orderId: orderId,
+        },
+        handler: async function (response) {
+          try {
+            const verifyRes = await dispatch(
+              verifyRazorpayPayment({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                orderId: orderId,
+              })
+            );
+
+            if (verifyRes?.payload?.success) {
+              sessionStorage.removeItem("currentOrderId");
+              window.location.href = "/shop/payment-success";
+            } else {
+              toast({ title: verifyRes?.payload?.message || "Payment verification failed", variant: "destructive" });
+            }
+          } catch (err) {
+            toast({ title: "Payment verification error", variant: "destructive" });
+          }
+        },
+        modal: {
+          ondismiss: function () {
+            setIsRazorpayStarting(false);
+          },
+        },
+        theme: {
+          color: "#0ea5e9",
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      toast({ title: "Unable to initiate Razorpay", variant: "destructive" });
+    } finally {
+      // Keep button text until popup opens or closes; reset on dismiss handler
+    }
   }
 
-  if (approvalURL) {
-    window.location.href = approvalURL;
-  }
+  // approvalURL removed along with PayPal
 
   return (
     <div className="flex flex-col text-white">
@@ -119,12 +192,10 @@ function ShoppingCheckout() {
           </div>
           <div className="mt-4 w-full">
             <Button 
-              onClick={handleInitiatePaypalPayment} 
+              onClick={handleInitiateRazorpayPayment} 
               className="w-full"
             >
-              {isPaymentStart
-                ? "Processing Paypal Payment..."
-                : "Checkout with Paypal"}
+              {isRazorpayStarting ? "Opening Razorpay..." : "Pay with Razorpay"}
             </Button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { HousePlug, LogOut, Menu, ShoppingCart, UserCog, Truck } from "lucide-react";
 import {
   Link,
+  NavLink,
   useNavigate,
 } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
@@ -26,21 +27,21 @@ function MenuItems() {
   const navigate = useNavigate();
 
   function handleNavigate(menuItem) {
-    // No session storage anymore
     navigate(menuItem.path);
   }
 
   return (
     <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
-        <Label
-          onClick={() => handleNavigate(menuItem)}
-          className="text-sm font-medium cursor-pointer"
+        <NavLink
+          to={menuItem.path}
           key={menuItem.id}
-          style={{ color: "#fff" }}
+          className={({ isActive }) => `text-sm font-medium ${isActive ? "underline" : ""}`}
+          style={{ color: "#fff", textDecoration: "none" }}
+          end
         >
           {menuItem.label}
-        </Label>
+        </NavLink>
       ))}
     </nav>
   );
