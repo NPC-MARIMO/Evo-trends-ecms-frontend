@@ -22,6 +22,15 @@ export const registerFormControls = [
   },
 ];
 
+export const filterOptions = {
+  category: [{ id: "Jhumka", label: "Jhumka" },
+  { id: "Maang Teek", label: "Maang Teek" },
+  { id: "Earings", label: "Earings" },
+  { id: "Necklace", label: "Necklace" },
+  { id: "Pendant", label: "Pendant" },
+  { id: "Ring", label: "Ring" },]
+};
+
 export const loginFormControls = [
   {
     name: "email",
@@ -58,21 +67,15 @@ export const addProductFormElements = [
     name: "category",
     componentType: "select",
     options: [
-      { id: "smart-watch", label: "Smart watch" },
-      { id: "safayar-full-lower", label: "Safayar Full Lower" },
-      { id: "leather-belt", label: "Leather Belt" },
-      { id: "self-adhesive-tape", label: "Self Adhesive-Tape" },
-      { id: "3-inch-50-meter-transparent", label: "3 inch 50 meter Transparents" },
+      { id: "Jhumka", label: "Jhumka" },
+      { id: "Maang Teek", label: "Maang Teek" },
+      { id: "Earings", label: "Earings" },
+      { id: "Necklace", label: "Necklace" },
+      { id: "Pendant", label: "Pendant" },
+      { id: "Ring", label: "Ring" },
     ],
   },
-  {
-    label: "Brand",
-    name: "brand",
-    componentType: "select",
-    options: [
-      { id: "GHASHIRAM AND NATTHI LAL ENTERPRISES ", label: "GHASHIRAM AND NATTHI LAL ENTERPRISES " },
-    ],
-  },
+ 
   {
     label: "Price",
     name: "price",
@@ -103,34 +106,32 @@ export const shoppingViewHeaderMenuItems = [
     path: "/shop/home",
   },
   {
-    id: "products",
-    label: "Products",
-    path: "/shop/listing",
+    id: "Jhumka",
+    label: "Jhumka",
+    path: "/shop/home",
   },
   {
-    id: "men",
-    label: "Men",
-    path: "/shop/listing",
+    id: "Maang Teek",
+    label: "Maang Teek",
+    path: "/shop/home",
   },
   {
-    id: "women",
-    label: "Women",
-    path: "/shop/listing",
+    id: "Earings",
+    label: "Earings",
+    path: "/shop/home",
+  },{
+    id: "Necklace",
+    label: "Necklace",
+    path: "/shop/home",
+  },{
+    id: "Pendant",
+    label: "Pendant",
+    path: "/shop/home", 
   },
   {
-    id: "kids",
-    label: "Kids",
-    path: "/shop/listing",
-  },
-  {
-    id: "footwear",
-    label: "Footwear",
-    path: "/shop/listing",
-  },
-  {
-    id: "accessories",
-    label: "Accessories",
-    path: "/shop/listing",
+    id: "Ring",
+    label: "Ring",
+    path: "/shop/home",
   },
   {
     id: "search",
@@ -145,24 +146,6 @@ export const categoryOptionsMap = {
   kids: "Leather Belt",
   accessories: "Self Adhesive-Tape",
   footwear: "3 inch 50 meter Transparents",
-};
-
-export const brandOptionsMap = {
-  nike: "GHASHIRAM AND NATTHI LAL ENTERPRISES",
- 
-};
-
-export const filterOptions = {
-  category: [
-    { id: "men", label: "Men" },
-    { id: "women", label: "Women" },
-    { id: "kids", label: "Leather Belt" },
-    { id: "accessories", label: "Self Adhesive-Tape" },
-    { id: "footwear", label: "Footwear" },
-  ],
-  brand: [
-       { id: "GHASHIRAM AND NATTHI LAL ENTERPRISES ", label: "GHASHIRAM AND NATTHI LAL ENTERPRISES " },
-  ],
 };
 
 export const sortOptions = [

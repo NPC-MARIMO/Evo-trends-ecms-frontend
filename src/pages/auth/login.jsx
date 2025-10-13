@@ -36,13 +36,13 @@ function AuthLogin() {
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-3xl text-white font-bold tracking-tight ">
           Sign in to your account
         </h1>
-        <p className="mt-2">
+        <p className="mt-2 text-white">
           Don't have an account
           <Link
-            className="font-medium ml-2 text-primary hover:underline"
+            className="font-medium ml-2 text-white hover:underline"
             to="/auth/register"
           >
             Register

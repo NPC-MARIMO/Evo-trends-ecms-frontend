@@ -1,0 +1,54 @@
+.hero{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    margin-bottom: 10rem;
+}
+.hero img{
+    width: 100%;
+    /* margin-top: 50px; */
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero .heroText1{
+    position: absolute;
+    top: 130px;
+    left: 10%;
+    letter-spacing: -5px;
+    font-size: 10rem;
+    color: #9C9C9C;
+    font-family: "Dancing Script"
+}
+.hero .heroText2{
+    position: absolute;
+    bottom: 90px;
+    left: 25%;
+    letter-spacing: -5px;
+    font-size: 8rem;
+    color: #9C9C9C;
+    font-family: "Amita";
+    font-weight: 700;
+}
+
+.hero .cart {
+    position: absolute;
+    color: white;
+    bottom: 4%;
+    right: 4%;
+    background: #333;
+    padding: .5rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.hero .domain{
+    position: absolute;
+    color: #9C9C9C;
+    bottom: 5%;
+    font-family: "Cormorant Upright";
+    transform: translateX(-50%);
+    left: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

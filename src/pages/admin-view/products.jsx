@@ -24,7 +24,7 @@ const initialFormData = {
   title: "",
   description: "",
   category: "",
-  brand: "",
+  brand: "Jhankar",
   price: "",
   salePrice: "",
   totalStock: "",
@@ -123,6 +123,7 @@ function AdminProducts() {
           : null}
       </div>
       <Sheet
+        className="overflow-auto bg-black "
         open={openCreateProductsDialog}
         onOpenChange={() => {
           setOpenCreateProductsDialog(false);
@@ -130,7 +131,7 @@ function AdminProducts() {
           setFormData(initialFormData);
         }}
       >
-        <SheetContent side="right" className="overflow-auto">
+        <SheetContent side="right" className="overflow-auto bg-[#111] text-white">
           <SheetHeader>
             <SheetTitle>
               {currentEditedId !== null ? "Edit Product" : "Add New Product"}

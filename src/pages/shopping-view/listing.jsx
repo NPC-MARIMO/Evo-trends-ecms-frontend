@@ -32,7 +32,7 @@ function createSearchParamsHelper(filterParams) {
     }
   }
 
-  console.log(queryParams, "queryParams");
+  // console.log(queryParams, "queryParams");
 
   return queryParams.join("&");
 }
@@ -79,12 +79,12 @@ function ShoppingListing() {
   }
 
   function handleGetProductDetails(getCurrentProductId) {
-    console.log(getCurrentProductId);
+    // console.log(getCurrentProductId);
     dispatch(fetchProductDetails(getCurrentProductId));
   }
 
   function handleAddtoCart(getCurrentProductId, getTotalStock) {
-    console.log(cartItems);
+    // console.log(cartItems);
     let getCartItems = cartItems.items || [];
 
     if (getCartItems.length) {
@@ -143,16 +143,25 @@ function ShoppingListing() {
     if (productDetails !== null) setOpenDetailsDialog(true);
   }, [productDetails]);
 
-  console.log(productList, "productListproductListproductList");
+  // console.log(productList, "productListproductListproductList");
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
+    <div
+    className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 min-h-[100vh] w-full  p-4 md:p-6">
       <ProductFilter filters={filters} handleFilter={handleFilter} />
-      <div className="bg-background w-full rounded-lg shadow-sm">
-        <div className="p-4 border-b flex items-center justify-between">
-          <h2 className="text-lg font-extrabold">All Products</h2>
+      <div
+        className="bg-background w-full rounded-lg shadow-sm"
+        style={{ color: "#fff", background: "rgba(30, 31, 38, 1)" }}
+      >
+        <div
+          className="p-4 border-b flex items-center justify-between"
+          style={{ color: "#fff", borderColor: "#444" }}
+        >
+          <h2 className="text-lg font-extrabold" style={{ color: "#fff" }}>
+            All Products
+          </h2>
           <div className="flex items-center gap-3">
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground" style={{ color: "#bbb" }}>
               {productList?.length} Products
             </span>
             <DropdownMenu>
@@ -161,17 +170,31 @@ function ShoppingListing() {
                   variant="outline"
                   size="sm"
                   className="flex items-center gap-1"
+                  style={{
+                    color: "#fff",
+                    borderColor: "#666",
+                    background: "#222",
+                  }}
                 >
-                  <ArrowUpDownIcon className="h-4 w-4" />
-                  <span>Sort by</span>
+                  <ArrowUpDownIcon className="h-4 w-4" color="#fff" />
+                  <span style={{ color: "#fff" }}>Sort by</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-[200px]">
+              <DropdownMenuContent
+                align="end"
+                className="w-[200px]"
+                style={{
+                  background: "#18181b",
+                  color: "#fff",
+                  borderColor: "#333",
+                }}
+              >
                 <DropdownMenuRadioGroup value={sort} onValueChange={handleSort}>
                   {sortOptions.map((sortItem) => (
                     <DropdownMenuRadioItem
                       value={sortItem.id}
                       key={sortItem.id}
+                      style={{ color: "#fff" }}
                     >
                       {sortItem.label}
                     </DropdownMenuRadioItem>
@@ -185,12 +208,21 @@ function ShoppingListing() {
           {productList && productList.length > 0
             ? productList.map((productItem) => (
                 <ShoppingProductTile
+                  key={productItem.id || productItem._id}
                   handleGetProductDetails={handleGetProductDetails}
                   product={productItem}
                   handleAddtoCart={handleAddtoCart}
+                  style={{ color: "#fff" }}
                 />
               ))
-            : null}
+            : (
+                <div
+                  className="col-span-full text-center text-lg"
+                  style={{ color: "#fff", opacity: 0.7 }}
+                >
+                  No products found.
+                </div>
+              )}
         </div>
       </div>
       <ProductDetailsDialog
