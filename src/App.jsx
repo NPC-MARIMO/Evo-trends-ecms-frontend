@@ -33,6 +33,9 @@ function App() {
     (state) => state.auth
   );
   const dispatch = useDispatch();
+
+  console.log(user);
+  
   
   useEffect(() => {
     dispatch(checkAuth());
