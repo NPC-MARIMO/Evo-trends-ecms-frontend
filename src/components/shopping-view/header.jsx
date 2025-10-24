@@ -4,7 +4,7 @@ import { shoppingViewHeaderMenuItems } from "@/config";
 
 function ShoppingHeader() {
   return (
-    <header className="w-full border-b bg-[#faf8f6] shadow-sm">
+    <header className="w-full  bg-[#faf8f6] shadow-sm">
       <div
         className="
           flex items-center justify-between

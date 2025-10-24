@@ -48,8 +48,8 @@ export default function Home() {
             <motion.img
               src={One}
               alt="Elegant woman with jewellery"
-              className="w-[370px] md:w-[570px] h-full object-cover scale-x-[-1]"
-              style={{ minHeight: "100vh" }}
+              className="w-[370px] md:w-[570px] object-cover"
+              style={{ minHeight: "80vh", scaleX: "-1"  }}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
