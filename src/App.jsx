@@ -40,12 +40,12 @@ function App() {
     dispatch(checkAuth());
   }, [dispatch]);
   
-  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+  if (isLoading) return <Skeleton className="w-[800] bg-white h-[600px]" />;
   
   console.log(isLoading, user);
   
   return (
-    <div className="flex flex-col overflow-hidden bg-background dark">
+    <div className="flex flex-col overflow-hidden bg-background">
       <Routes>
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="terms-and-conditions" element={<TermsAndConditions />} />

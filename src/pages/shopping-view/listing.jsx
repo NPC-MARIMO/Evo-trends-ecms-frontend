@@ -151,17 +151,17 @@ function ShoppingListing() {
       <ProductFilter filters={filters} handleFilter={handleFilter} />
       <div
         className="bg-background w-full rounded-lg shadow-sm"
-        style={{ color: "#fff", background: "rgba(30, 31, 38, 1)" }}
+        style={{ color: "#fff", background: "#fff" }}
       >
         <div
           className="p-4 border-b flex items-center justify-between"
           style={{ color: "#fff", borderColor: "#444" }}
         >
-          <h2 className="text-lg font-extrabold" style={{ color: "#fff" }}>
+          <h2 className="text-lg font-extrabold" style={{ color: "#000" }}>
             All Products
           </h2>
           <div className="flex items-center gap-3">
-            <span className="text-muted-foreground" style={{ color: "#bbb" }}>
+            <span className="text-muted-foreground" style={{ color: "#000" }}>
               {productList?.length} Products
             </span>
             <DropdownMenu>

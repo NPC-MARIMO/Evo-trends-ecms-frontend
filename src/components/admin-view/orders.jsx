@@ -69,7 +69,7 @@ function AdminOrdersView() {
                             ? "bg-green-500"
                             : orderItem?.orderStatus === "rejected"
                             ? "bg-red-600"
-                            : "bg-black"
+                            : "bg-gray-500"
                         }`}
                       >
                         {orderItem?.orderStatus}

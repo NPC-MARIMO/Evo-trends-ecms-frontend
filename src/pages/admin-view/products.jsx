@@ -123,7 +123,7 @@ function AdminProducts() {
           : null}
       </div>
       <Sheet
-        className="overflow-auto bg-black "
+        className="overflow-auto bg-white "
         open={openCreateProductsDialog}
         onOpenChange={() => {
           setOpenCreateProductsDialog(false);
@@ -131,7 +131,7 @@ function AdminProducts() {
           setFormData(initialFormData);
         }}
       >
-        <SheetContent side="right" className="overflow-auto bg-[#111] text-white">
+        <SheetContent side="right" className="overflow-auto bg-white text-black">
           <SheetHeader>
             <SheetTitle>
               {currentEditedId !== null ? "Edit Product" : "Add New Product"}
