@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import Logo from '../../assets/logo.jpg'
 
 // Custom CSS for the footer
 const footerStyles = `
@@ -103,8 +104,8 @@ export default function ShoppingFooter() {
               {/* Brand Column */}
               <div className="lg:col-span-1">
                 <Link to="/shop/home" className="flex items-center gap-3 mb-6 group">
-                  <div className="p-2 rounded-xl bg-gradient-to-br from-[#312E81] to-[#4F46E5] group-hover:from-[#B38A69] group-hover:to-[#312E81] transition-all duration-300">
-                    <HousePlug className="h-5 w-5 text-white" />
+                  <div className=" rounded-xl bg-gradient-to-br from-[#312E81] to-[#4F46E5] group-hover:from-[#B38A69] group-hover:to-[#312E81] transition-all duration-300">
+                    <img src={Logo} alt="Jhankaar Logo" className="h-10 rounded w-10 object-contain" />
                   </div>
                   <span className="font-bold text-xl bg-gradient-to-r from-[#312E81] to-[#B38A69] bg-clip-text text-transparent">
                     Jhankaar
