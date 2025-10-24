@@ -31,7 +31,7 @@ const fadeRight = {
 export default function Home() {
   return (
     <div>
-      <motion.section 
+      <motion.section
         className="bg-[#fcf8f3] min-h-screen flex items-center justify-center "
         initial="hidden"
         animate="visible"
@@ -49,7 +49,7 @@ export default function Home() {
               src={One}
               alt="Elegant woman with jewellery"
               className="w-[370px] md:w-[570px] object-cover"
-              style={{ minHeight: "80vh", scaleX: "-1"  }}
+              style={{ minHeight: "80vh", scaleX: "-1" }}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
@@ -104,89 +104,130 @@ export default function Home() {
         </div>
       </motion.section>
       <motion.section
-        className="bg-[#464f38] py-16 px-2 md:px-0 flex justify-center"
+        className="bg-[#B38A69] py-16 px-2 md:px-0 flex justify-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeUp}
       >
         <div className="flex flex-row w-full max-w-7xl items-center justify-between gap-7 md:gap-10">
-          {/* Leftmost vertical logo */}
-          <motion.div 
-            className="flex flex-col items-center w-20"
-            variants={fadeLeft}
-          >
-            <motion.div
-              className="bg-[#454c35] rounded-lg flex flex-col items-center justify-center w-16 h-32"
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <motion.img
-                src="https://i.imgur.com/bj5P09t.png"
-                alt="Vertical Logo"
-                className="w-10 h-20 object-contain"
-                style={{ marginBottom: "0.25rem" }}
-                initial={{ y: -20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.7 }}
-                viewport={{ once: true }}
-              />
-              <motion.span
-                className="mt-2 text-xs text-[#b9c1ac] tracking-widest"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                viewport={{ once: true }}
-              >JEWELS</motion.span>
-            </motion.div>
-          </motion.div>
-          {/* Grid of features */}
           <motion.div
-            className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center"
+            className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center bg-[#B38A69] rounded-2xl py-12"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
             {[0, 1, 2, 3].map((i) => (
               <motion.div
-                className="flex flex-col items-center"
+                className="flex flex-col items-center group"
                 key={i}
                 custom={i}
                 variants={fadeUp}
+                whileHover="hovered"
               >
-                <motion.span className="mb-2"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: i * 0.17 }}
-                  viewport={{ once: true }}
+                {/* Parent motion.div collectively controls children via animate prop */}
+                <motion.div
+                  className="flex flex-col items-center"
+                  initial={false}
+                  animate={undefined} // Let Framer Bubble the animate from Parent on hover
+                  variants={{
+                    hovered: {},
+                  }}
                 >
-                  {
-                    // icons:
-                    i === 0 ? (
-                      <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="#eaddc1" strokeWidth="1.8"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#eaddc1" strokeWidth="1.6" /><path d="M4 10h16" stroke="#eaddc1" strokeWidth="1.6" /><rect x="9" y="13" width="6" height="1.5" rx=".6" fill="#eaddc1" /></svg>
-                    ) : i === 1 ? (
-                      <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="#eaddc1" strokeWidth="1.7"><circle cx="12" cy="12" r="9" stroke="#eaddc1" strokeWidth="1.6"/><path d="M12 12l2.5-4.5" stroke="#eaddc1" strokeWidth="1.6" strokeLinecap="round"/><circle cx="12" cy="15.5" r="1.5" fill="#eaddc1" /></svg>
-                    ) : i === 2 ? (
-                      <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="#eaddc1" strokeWidth="1.6"><circle cx="12" cy="12" r="9" stroke="#eaddc1" strokeWidth="1.6"/><path d="M12 7v5l3 3" stroke="#eaddc1" strokeWidth="1.6" strokeLinecap="round" /></svg>
-                    ) : (
-                      <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="#eaddc1" strokeWidth="1.7"><path d="M17 8.5a5 5 0 1 1-10 0M12 15.5V6" stroke="#eaddc1" strokeWidth="1.6" strokeLinecap="round" /><path d="M12 15.5l3.2 3.2m-3.2-3.2l-3.2 3.2" stroke="#eaddc1" strokeWidth="1.6" strokeLinecap="round" /></svg>
-                    )
-                  }
-                </motion.span>
-                <motion.span
-                  className={`font-semibold text-[#ede8da] text-lg${i === 2 ? " text-center" : ""}`}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.22 + i * 0.12, duration: 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  {i === 0 && 'Reach Out'}
-                  {i === 1 && 'Connect For'}
-                  {i === 2 && <>Discover the Art<br className="hidden md:block" />of Personalisation</>}
-                  {i === 3 && 'Elevate Your'}
-                </motion.span>
+                  {/* Icon and Text in same 'group' for simulataneous animation */}
+                  <motion.div
+                    className="mb-4 p-4 rounded-2xl bg-white transition-all duration-500 shadow-lg"
+                    initial={{ scale: 0.8, opacity: 0, rotateY: 180 }}
+                    whileInView={{ scale: 1, opacity: 1, rotateY: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    variants={{
+                      hovered: {
+                        rotateY: 360,
+                        transition: { duration: 0.7 }
+                      }
+                    }}
+                  >
+                    {
+                      i === 0 ? (
+                        <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
+                          <rect x="4" y="6" width="16" height="12" rx="2" stroke="#312E81" strokeWidth="1.8" />
+                          <path d="M4 10h16" stroke="#312E81" strokeWidth="1.8" />
+                          <rect x="9" y="13" width="6" height="1.5" rx=".6" fill="#B38A69" />
+                          <path d="M8 8h2v1H8zM14 8h2v1h-2z" fill="#312E81" />
+                        </svg>
+                      ) : i === 1 ? (
+                        <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
+                          <circle cx="12" cy="12" r="9" stroke="#312E81" strokeWidth="1.8" fill="#F1F3FF" />
+                          <path d="M12 12l2.5-4.5" stroke="#B38A69" strokeWidth="2" strokeLinecap="round" />
+                          <circle cx="12" cy="15.5" r="1.5" fill="#312E81" />
+                          <path d="M9 9l1.5 1.5M15 9l-1.5 1.5" stroke="#B38A69" strokeWidth="1.5" strokeLinecap="round" />
+                        </svg>
+                      ) : i === 2 ? (
+                        <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
+                          <circle cx="12" cy="12" r="9" stroke="#312E81" strokeWidth="1.8" fill="#F1F3FF" />
+                          <path d="M12 7v5l3 3" stroke="#B38A69" strokeWidth="2" strokeLinecap="round" />
+                          <circle cx="12" cy="7" r="0.8" fill="#312E81" />
+                          <circle cx="15" cy="15" r="0.8" fill="#312E81" />
+                          <circle cx="9" cy="12" r="0.8" fill="#312E81" />
+                        </svg>
+                      ) : (
+                        <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
+                          <path d="M17 8.5a5 5 0 1 1-10 0M12 15.5V6" stroke="#312E81" strokeWidth="2" strokeLinecap="round" />
+                          <path d="M12 15.5l3.2 3.2m-3.2-3.2l-3.2 3.2" stroke="#B38A69" strokeWidth="2" strokeLinecap="round" />
+                          <circle cx="12" cy="8.5" r="0.8" fill="#B38A69" />
+                          <path d="M8 5.5l1-1m7 1l-1-1" stroke="#312E81" strokeWidth="1.2" strokeLinecap="round" />
+                        </svg>
+                      )
+                    }
+                  </motion.div>
+
+                  {/* Text Content */}
+                  <motion.div
+                    className="text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                  >
+                    <motion.span
+                      className="font-bold text-[#312E81] text-lg md:text-xl leading-tight block transition-transform duration-300"
+                      variants={{
+                        hovered: { scale: 1.11 }
+                      }}
+                    >
+                      {i === 0 && 'Premium Quality'}
+                      {i === 1 && 'Expert Craftsmanship'}
+                      {i === 2 && 'Custom Personalization'}
+                      {i === 3 && 'Elevated Experience'}
+                    </motion.span>
+
+                    <motion.p
+                      className="text-gray-600 text-sm mt-2 leading-relaxed max-w-[140px] mx-auto transition-all duration-300"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      viewport={{ once: true }}
+                    >
+                      {i === 0 && 'Exceptional materials and timeless designs'}
+                      {i === 1 && 'Handcrafted with precision and passion'}
+                      {i === 2 && 'Tailored pieces that tell your story'}
+                      {i === 3 && 'Luxury that transcends expectations'}
+                    </motion.p>
+                  </motion.div>
+
+                  {/* Decorative Element */}
+                  <motion.div
+                    className="w-0 h-1 bg-gradient-to-r from-[#B38A69] to-[#312E81] mt-3 rounded-full transition-all duration-500"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: 24 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                    variants={{
+                      hovered: { width: 48 }
+                    }}
+                  />
+                </motion.div>
               </motion.div>
             ))}
           </motion.div>
