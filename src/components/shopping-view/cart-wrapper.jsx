@@ -20,9 +20,9 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
       : 0;
 
   return (
-    <SheetContent className="sm:max-w-md bg-[#111] text-white">
+    <SheetContent className="sm:max-w-md bg-[#fff] text-black">
       <SheetHeader>
-        <SheetTitle className="text-white">Your Cart</SheetTitle>
+        <SheetTitle className="text-black">Your Cart</SheetTitle>
       </SheetHeader>
       <div className="mt-8 space-y-4">
         {cartItems && cartItems.length > 0
@@ -31,8 +31,8 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
       </div>
       <div className="mt-8 space-y-4">
         <div className="flex justify-between">
-          <span className="font-bold text-white">Total</span>
-          <span className="font-bold text-white">₹{totalCartAmount}</span>
+          <span className="font-bold text-black">Total</span>
+          <span className="font-bold text-black">₹{totalCartAmount}</span>
         </div>
       </div>
       <Button

@@ -34,15 +34,17 @@ function AuthLogin() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-6">
+    <div className="mx-auto w-full max-w-md space-y-6 rounded-2xl "
+    >
       <div className="text-center">
-        <h1 className="text-3xl text-white font-bold tracking-tight ">
+        <h1 className="text-3xl font-bold tracking-tight" style={{ color: "#312E81" }}>
           Sign in to your account
         </h1>
-        <p className="mt-2 text-white">
-          Don't have an account
+        <p className="mt-2" style={{ color: "#312E81" }}>
+          Don't have an account?
           <Link
-            className="font-medium ml-2 text-white hover:underline"
+            className="font-medium ml-2 hover:underline"
+            style={{ color: "#B58E6F" }}
             to="/auth/register"
           >
             Register
@@ -55,6 +57,7 @@ function AuthLogin() {
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
+        // Optional: you can pass color props to style inputs/buttons if CommonForm supports it
       />
     </div>
   );

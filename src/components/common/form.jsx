@@ -113,12 +113,16 @@ function CommonForm({
       <div className="flex flex-col gap-3">
         {formControls.map((controlItem) => (
           <div className="grid w-full gap-1.5" key={controlItem.name}>
-            <Label className="mb-1 text-white">{controlItem.label}</Label>
+            <Label className="mb-1 text-[#312E81]">{controlItem.label}</Label>
             {renderInputsByComponentType(controlItem)}
           </div>
         ))}
       </div>
-      <Button disabled={isBtnDisabled} type="submit" className="mt-2 w-full">
+      <Button
+        disabled={isBtnDisabled}
+        type="submit"
+        className="mt-2 bg-[#B38A69] hover:bg-[#9c7559] w-full"
+      >
         {buttonText || "Submit"}
       </Button>
     </form>
