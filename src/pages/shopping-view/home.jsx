@@ -1,500 +1,218 @@
-import heroStyles from "./hero.module.css";
-import aboutStyles from "./about.module.css";
-import productStyles from "./product.module.css";
-import { Link } from "react-router-dom";
-import { MoveRight, ShoppingCart } from "lucide-react";
-import { AboutLeft, Five, Four, HomeHeroBg, One, Three, Two } from "../../assets/index";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { useRef } from "react";
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 72 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, type: "spring", bounce: 0.24 } }
-};
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay, type: "spring", bounce: 0.24 }
-  })
-};
-
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    transition: { duration: 0.8, delay }
-  })
-};
+import React from 'react'
+import One from '../../assets/One.png'
+import Two from '../../assets/Two.png'
+import Three from '../../assets/Two.png'
+import Four from '../../assets/Two.png'
 
 export default function Home() {
-  let aboutPara1 =
-    "At Jhaankar, everypiece is handcrafted with passion, blending timeless artistry and modern elegance. We source our materials ethetically and work only with certified suppliers, ensuring every is as responsible as it is beautiful.";
-  let aboutPara2 =
-    "Experienced personalised services, unique designes, and a legacy of trust - making every purchase a celebration of style and intefrity.";
-
-  let domain = "www.thejhaankar.com";
-
-  const fiveProducts = [
-    { image: One, name: "", price: "", description: "" },
-    { image: Two, name: "", price: "", description: "" },
-    { image: Three, name: "", price: "", description: "" },
-    { image: Four, name: "", price: "", description: "" },
-    { image: Five, name: "", price: "", description: "" }
-  ];
-
-  // Framer motion scroll animations for each section
-  const heroRef = useRef(null);
-  const heroInView = useInView(heroRef, { once: true, margin: "-18% 0px" });
-
-  const aboutRef = useRef(null);
-  const aboutInView = useInView(aboutRef, { once: true, margin: "-12% 0px" });
-
-  const productRef = useRef(null);
-  const productInView = useInView(productRef, { once: true, margin: "-15% 0px" });
-
-  const contactWrapperRef = useRef(null);
-  const contactInView = useInView(contactWrapperRef, { once: true, margin: "-12% 0px" });
-
   return (
-    <div style={{ color: "#fff" }}>
-      {/* hero section */}
-      <motion.section
-        ref={heroRef}
-        id="hero"
-        className={heroStyles.hero}
-        style={{ color: "#fff", position: 'relative' }}
-        variants={sectionVariants}
-        initial="hidden"
-        animate={heroInView ? "visible" : "hidden"}
-      >
-        <motion.img
-          src={HomeHeroBg}
-          alt=""
-          initial={{ opacity: 0, scale: 1.12 }}
-          animate={heroInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.12 }}
-          transition={{ duration: 1.1, ease: "easeOut" }}
-        />
-
-        <motion.h1
-          className={heroStyles.heroText1}
-          style={{ color: "#fff", textShadow: "2px 2px 10px #000" }}
-          variants={fadeInUp}
-          initial="hidden"
-          animate={heroInView ? "visible" : "hidden"}
-          transition={{ delay: 0.15, type: "spring", bounce: 0.18 }}
-        >
-          The
-        </motion.h1>
-        <motion.h1
-          className={heroStyles.heroText2}
-          style={{ color: "#fff", textShadow: "2px 2px 10px #000" }}
-          variants={fadeInUp}
-          initial="hidden"
-          animate={heroInView ? "visible" : "hidden"}
-          transition={{ delay: 0.35, type: "spring", bounce: 0.18 }}
-        >
-          झंकार
-        </motion.h1>
-
-        <motion.div
-          className={heroStyles.cart}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={heroInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-          transition={{ delay: 0.55, type: "spring", bounce: 0.55, duration: 0.65 }}
-        >
-          <ShoppingCart color="#fff" />
-        </motion.div>
-
-        <motion.span
-          className={heroStyles.domain}
-          style={{ color: "#fff", textShadow: "1px 1px 4px #000" }}
-          variants={fadeInUp}
-          initial="hidden"
-          animate={heroInView ? "visible" : "hidden"}
-          transition={{ delay: 0.7, type: "spring", bounce: 0.25 }}
-        >
-          {" "}
-          {domain}
-        </motion.span>
-      </motion.section>
-
-      {/* about section */}
-      <motion.section
-        ref={aboutRef}
-        id="about"
-        className={aboutStyles.about}
-        style={{ color: "#fff", background: "none" }}
-        variants={sectionVariants}
-        initial="hidden"
-        animate={aboutInView ? "visible" : "hidden"}
-      >
-        <motion.div
-          style={{ display: "flex", justifyContent: "space-between" }}
-          variants={fadeIn}
-          initial="hidden"
-          animate={aboutInView ? "visible" : "hidden"}
-          transition={{ duration: 0.7 }}
-        >
-          <motion.div
-            className={aboutStyles.aboutImg}
-            initial={{ opacity: 0, x: -40 }}
-            animate={aboutInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
-            transition={{ delay: 0.13, type: "spring", bounce: 0.3 }}
-          >
-            <img className={aboutStyles.aboutImage} src={AboutLeft} alt="" />
-          </motion.div>
-          <motion.div
-            className={aboutStyles.aboutText}
-            style={{ paddingLeft: "2rem", color: "#fff" }}
-            initial={{ opacity: 0, x: 40 }}
-            animate={aboutInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-            transition={{ delay: 0.18, type: "spring", bounce: 0.2 }}
-          >
-            <div>
-              <motion.h1
-                style={{ color: "#fff" }}
-                variants={fadeIn}
-                initial="hidden"
-                animate={aboutInView ? "visible" : "hidden"}
-                transition={{ delay: 0.21 }}
-              >
-                Why
-              </motion.h1>
-              <motion.h1
-                className={aboutStyles.jhankar}
-                style={{
-                  marginLeft: "14rem",
-                  color: "#eee",
-                  textShadow: "2px 2px 7px #000",
-                  fontWeight: 700,
-                }}
-                variants={fadeIn}
-                initial="hidden"
-                animate={aboutInView ? "visible" : "hidden"}
-                transition={{ delay: 0.33 }}
-              >
-                झंकार&nbsp;?
-              </motion.h1>
-            </div>
-            <motion.div
-              variants={fadeIn}
-              initial="hidden"
-              animate={aboutInView ? "visible" : "hidden"}
-              transition={{ delay: 0.39 }}
-            >
-              <p style={{ color: "#fff", textShadow: "1px 1px 6px #000" }}>
-                {aboutPara1} <br /> {aboutPara2}
-              </p>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      </motion.section>
-
-      {/* our product */}
-      <motion.section
-        ref={productRef}
-        id="product"
-        className={productStyles.product}
-        style={{ color: "#fff" }}
-        variants={sectionVariants}
-        initial="hidden"
-        animate={productInView ? "visible" : "hidden"}
-      >
-        <div>
-          <motion.h1
-            style={{ color: "#fff", textShadow: "2px 2px 10px #000" }}
-            variants={fadeInUp}
-            initial="hidden"
-            animate={productInView ? "visible" : "hidden"}
-            transition={{ delay: 0.11 }}
-          >
-            Our Products
-          </motion.h1>
-
-          <motion.div
-            className={productStyles.cards}
-            style={{ display: "flex", flexWrap: "wrap", gap: "2.5rem", marginTop: "2.5rem", justifyContent: "center" }}
-            initial="hidden"
-            animate={productInView ? "visible" : "hidden"}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.16,
-                  delayChildren: 0.22,
-                },
-              },
-            }}
-          >
-            {fiveProducts.map((product, index) => (
-              <motion.div
-                className={productStyles.card}
-                key={index}
-                style={{ color: "#fff" }}
-                variants={fadeInUp}
-                custom={index * 0.08 + 0.2}
-                initial="hidden"
-                animate={productInView ? "visible" : "hidden"}
-                transition={{ type: "spring", bounce: 0.13, duration: 0.6, delay: 0.25 + index * 0.08 }}
-                whileHover={{ scale: 1.05, boxShadow: "0 8px 32px #0003" }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <motion.div
-                  className={productStyles.cardImg}
-                  initial={{ rotate: -12, opacity: 0 }}
-                  animate={productInView ? { rotate: 0, opacity: 1 } : { rotate: -12, opacity: 0 }}
-                  transition={{ delay: 0.25 + index * 0.08, duration: 0.47, type: "spring", bounce: 0.4 }}
-                >
-                  <img src={product.image} alt="" />
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className={productStyles.button}
-            initial={{ opacity: 0, y: 26 }}
-            animate={productInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 }}
-            transition={{ delay: 0.41, duration: 0.5 }}
-          >
-            <motion.button
-              style={{ color: "#fff", background: "#222" }}
-              whileHover={{ scale: 1.06, background: "#333" }}
-              whileTap={{ scale: 0.96 }}
-            >
-              <Link
-                style={{
-                  textDecoration: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "10px",
-                  color: "#fff",
-                }}
-                to="/shop/listing"
-              >
-                <motion.div
-                  className={productStyles.Arrow1}
-                  initial={{ x: -12, opacity: 0 }}
-                  animate={productInView ? { x: 0, opacity: 1 } : { x: -12, opacity: 0 }}
-                  transition={{ delay: 0.58, duration: 0.32 }}
-                >
-                  <MoveRight color="#fff" />
-                </motion.div>
-                View All
-                <motion.div
-                  className={productStyles.Arrow2}
-                  initial={{ x: 12, opacity: 0 }}
-                  animate={productInView ? { x: 0, opacity: 1 } : { x: 12, opacity: 0 }}
-                  transition={{ delay: 0.68, duration: 0.32 }}
-                >
-                  <MoveRight color="#fff" />
-                </motion.div>
-              </Link>
-            </motion.button>
-          </motion.div>
+    <div>
+      <section className="bg-[#fcf8f3] min-h-screen flex items-center justify-center ">
+        <div className="flex flex-col md:flex-row items-stretch gap-12  w-full">
+          {/* Left: Hero Image */}
+          <div className="flex-shrink-0 self-stretch">
+            <img
+              src={One}
+              alt="Elegant woman with jewellery"
+              className="w-[370px] md:w-[570px] h-full object-cover scale-x-[-1]"
+              style={{ minHeight: "100vh" }}
+            />
+          </div>
+          {/* Right: Hero Content */}
+          <div className="flex-1 flex flex-col justify-center md:pl-12 mt-10 md:mt-0">
+            <span className="text-[#b69b85] font-medium text-base mb-2 md:mb-3">
+              Elevate Your Elegance
+            </span>
+            <h1 className="text-5xl md:text-6xl font-bold text-[#3e3228] mb-4 leading-tight">
+              <span className="font-bold italic text-[#343332]">Uncover the</span>
+            </h1>
+            <p className="text-[#665d56] text-lg md:text-xl mb-6 max-w-xl leading-relaxed">
+              Discover the Extraordinary: Jewellery that Captivates the Senses. Crafted with Passion, Designed for the Discerning
+            </p>
+            <button className="bg-[#b38a69] hover:bg-[#9c7659] text-white px-8 py-3 rounded font-semibold shadow-md w-fit transition-colors duration-200 mb-8">
+              Explore Now
+            </button>
+            <span className="text-[#847567] text-sm md:text-base tracking-wide">
+              Embrace the Exceptional: Unlock a World of Luxurious
+            </span>
+          </div>
+          {/* Optionally add decorative leaf graphics on the right for more fidelity */}
         </div>
-      </motion.section>
+      </section>
+      <section className="bg-[#464f38] py-16 px-2 md:px-0 flex justify-center">
+        <div className="flex flex-row w-full max-w-7xl items-center justify-between gap-7 md:gap-10">
+          {/* Leftmost vertical logo */}
+          <div className="flex flex-col items-center w-20">
+            <div className="bg-[#454c35] rounded-lg flex flex-col items-center justify-center w-16 h-32">
+              <img
+                src="https://i.imgur.com/bj5P09t.png"
+                alt="Vertical Logo"
+                className="w-10 h-20 object-contain"
+                style={{ marginBottom: "0.25rem" }}
+              />
+              <span className="mt-2 text-xs text-[#b9c1ac] tracking-widest">JEWELS</span>
+            </div>
+          </div>
+          {/* Grid of features */}
+          <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
+            <div className="flex flex-col items-center">
+              <span className="mb-2">
+                <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="#eaddc1" strokeWidth="1.8"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#eaddc1" strokeWidth="1.6" /><path d="M4 10h16" stroke="#eaddc1" strokeWidth="1.6" /><rect x="9" y="13" width="6" height="1.5" rx=".6" fill="#eaddc1" /></svg>
+              </span>
+              <span className="font-semibold text-[#ede8da] text-lg">Reach Out</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="mb-2">
+                <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="#eaddc1" strokeWidth="1.7"><circle cx="12" cy="12" r="9" stroke="#eaddc1" strokeWidth="1.6"/><path d="M12 12l2.5-4.5" stroke="#eaddc1" strokeWidth="1.6" strokeLinecap="round"/><circle cx="12" cy="15.5" r="1.5" fill="#eaddc1" /></svg>
+              </span>
+              <span className="font-semibold text-[#ede8da] text-lg">Connect For</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="mb-2">
+                <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="#eaddc1" strokeWidth="1.6"><circle cx="12" cy="12" r="9" stroke="#eaddc1" strokeWidth="1.6"/><path d="M12 7v5l3 3" stroke="#eaddc1" strokeWidth="1.6" strokeLinecap="round" /></svg>
+              </span>
+              <span className="font-semibold text-[#ede8da] text-lg text-center">Discover the Art<br className="hidden md:block" />of Personalisation</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="mb-2">
+                <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="#eaddc1" strokeWidth="1.7"><path d="M17 8.5a5 5 0 1 1-10 0M12 15.5V6" stroke="#eaddc1" strokeWidth="1.6" strokeLinecap="round" /><path d="M12 15.5l3.2 3.2m-3.2-3.2l-3.2 3.2" stroke="#eaddc1" strokeWidth="1.6" strokeLinecap="round" /></svg>
+              </span>
+              <span className="font-semibold text-[#ede8da] text-lg">Elevate Your</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="flex justify-center min-h-screen items-center py-24 bg-white">
+        <div className="flex flex-col md:flex-row gap-16 items-center max-w-6xl w-full">
+          <div className="flex-shrink-0">
+            <img
+              src={One}
+              alt="Elegant woman wearing jewellery"
+              className="bg-[#c5c2c2] object-cover shadow-md w-[400px] h-[470px] md:w-[440px] md:h-[520px]"
+            />
+          </div>
+          <div className="flex-1 px-4">
+            <h1 className="text-5xl md:text-6xl font-semibold text-[#343332] mb-6">
+              <span className="italic font-bold">Timeless </span> <br />
+              <span className="italic">Elegance</span>
+            </h1>
+            <p className="text-[#79787a] text-lg md:text-xl mt-10 mb-10 max-w-xl leading-relaxed">
+              Discover the Extraordinary: Our Jewellery Collection Transcends Time, Embodying the Essence of Luxury and Refinement. Elevate your style with pieces that captivate the senses and make a lasting impression.
+            </p>
+            <button className="bg-[#7d5a39]  text-white px-10 py-4 text-lg shadow-lg font-semibold hover:bg-[#694b2e] transition-all duration-200">
+              Shop Now
+            </button>
+          </div>
+        </div>
+      </section>
 
-      {/* contact section */}
-      <motion.div
-        ref={contactWrapperRef}
-        className="w-full h-full bg-[#000]"
-        variants={sectionVariants}
-        initial="hidden"
-        animate={contactInView ? "visible" : "hidden"}
-        transition={{ delay: 0.09, duration: 0.7, type: "spring", bounce: 0.28 }}
-      >
-        <motion.section
-          id="contact"
-          style={{
-            background: "#111",
-            color: "#fff",
-            padding: "48px 0",
-            marginTop: "48px",
-            borderRadius: "16px",
-            boxShadow: "0px 8px 24px rgba(0,0,0,0.14)",
-            maxWidth: 900,
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-          variants={fadeInUp}
-          initial="hidden"
-          animate={contactInView ? "visible" : "hidden"}
-          transition={{ delay: 0.17 }}
-        >
-          <motion.div
-            style={{
-              maxWidth: 500,
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              gap: "32px",
-              alignItems: "center",
-            }}
-            variants={fadeIn}
-            initial="hidden"
-            animate={contactInView ? "visible" : "hidden"}
-            transition={{ delay: 0.22 }}
-          >
-            <motion.h2
-              style={{
-                fontSize: "2rem",
-                fontWeight: 700,
-                marginBottom: 0,
-                letterSpacing: "1px",
-                filter: "drop-shadow(2px 4px 20px #111)",
-              }}
-              variants={fadeIn}
-              initial="hidden"
-              animate={contactInView ? "visible" : "hidden"}
-              transition={{ delay: 0.3 }}
-            >
-              Contact Us
-            </motion.h2>
-            <motion.p
-              style={{
-                color: "#bbb",
-                fontSize: "1.05rem",
-                margin: 0,
-                textAlign: "center",
-                maxWidth: 380,
-              }}
-              variants={fadeIn}
-              initial="hidden"
-              animate={contactInView ? "visible" : "hidden"}
-              transition={{ delay: 0.37 }}
-            >
-              Have a question, suggestion, or need support? Fill out the form below and our team will get back to you shortly.
-            </motion.p>
-            <motion.form
-              style={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                gap: "18px",
-              }}
-              onSubmit={(e) => {
-                e.preventDefault();
-                // you can handle form submission here
-                alert("Thank you for contacting us! We will respond soon.");
-                e.target.reset();
-              }}
-              variants={{
-                hidden: { opacity: 0, scale: 0.95 },
-                visible: { opacity: 1, scale: 1, transition: { delayChildren: 0.44, staggerChildren: 0.08 } }
-              }}
-              initial="hidden"
-              animate={contactInView ? "visible" : "hidden"}
-            >
-              <motion.input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                required
-                style={{
-                  background: "#232329",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "8px",
-                  padding: "13px 18px",
-                  fontSize: "1rem",
-                  outline: "none",
-                  boxShadow: "0 1px 4px rgba(30,33,40,0.10)",
-                }}
-                variants={fadeIn}
-                custom={0}
-                initial="hidden"
-                animate={contactInView ? "visible" : "hidden"}
-                transition={{ delay: 0.48 }}
-                whileFocus={{ boxShadow: "0 2px 8px #6662" }}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row gap-16 items-center max-w-6xl">
+          <div className="flex-1 px-4">
+            <h2 className="text-4xl md:text-5xl font-semibold text-[#2c2926] mb-6">
+              Uncover <span className="italic font-bold text-[#7d5a39]">Unique Designs</span>
+            </h2>
+            <p className="text-[#79787a] text-lg md:text-xl mb-8 max-w-xl leading-relaxed">
+              From everyday elegance to statement pieces — find jewellery that fits every moment. Crafted with precision, made to inspire.
+            </p>
+            <button className="bg-[#343332] text-white px-8 py-3 text-lg font-semibold hover:bg-[#222] transition-all duration-200">
+              Explore Collection
+            </button>
+          </div>
+          <div className="flex-shrink-0">
+            <div className="w-[340px] h-[420px] bg-[#e6e1db] flex items-center justify-center shadow-lg">
+              {/* Placeholder for a product image, you may change src */}
+              <img
+                src={Two}
+                alt="Jewellery Design"
+                className="object-cover shadow w-[340px] h-[420px]"
               />
-              <motion.input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                required
-                style={{
-                  background: "#232329",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "8px",
-                  padding: "13px 18px",
-                  fontSize: "1rem",
-                  outline: "none",
-                  boxShadow: "0 1px 4px rgba(30,33,40,0.10)",
-                }}
-                variants={fadeIn}
-                custom={0.04}
-                initial="hidden"
-                animate={contactInView ? "visible" : "hidden"}
-                transition={{ delay: 0.56 }}
-                whileFocus={{ boxShadow: "0 2px 8px #6662" }}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="py-20 bg-[#fcfaf6]">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex flex-col items-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-semibold text-[#2c2926] mb-2 font-serif">
+              Curated Perfection
+            </h2>
+            <p className="text-[#7d5a39] mt-2 text-base md:text-lg font-light">
+              Elevate Your Look with Our Exclusive Jewellery Designs
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-center items-start">
+            <div className="flex flex-col items-center">
+              <div className="w-[330px] h-[385px] bg-[#ebe9e5] flex items-center justify-center shadow-lg mb-5">
+                <img
+                  src={Three} // Replace with your actual image import
+                  alt="Radiant Elegance - Timeless Allure"
+                  className="object-cover w-[330px] h-[385px]"
+                />
+              </div>
+              <span className="mt-2 font-semibold text-[#45413d] text-lg block">
+                Radiant Elegance
+              </span>
+              <span className="text-[#7d5a39] font-light italic text-base">
+                Timeless Allure
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-[330px] h-[385px] bg-[#ebe9e5] flex items-center justify-center shadow-lg mb-5">
+                <img
+                  src={Four} // Replace with your actual image import
+                  alt="Captivating Style - Refined"
+                  className="object-cover w-[330px] h-[385px]"
+                />
+              </div>
+              <span className="mt-2 font-semibold text-[#45413d] text-lg block">
+                Captivating Style
+              </span>
+              <span className="text-[#7d5a39] font-light italic text-base">
+                Refined
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="py-20 bg-[#fcfaf6]">
+        <div className="container mx-auto max-w-6xl px-4 flex flex-col items-center">
+          <h2 className="text-4xl md:text-5xl font-semibold text-[#2c2926] mb-2 font-serif">
+            Curated Perfection
+          </h2>
+          <p className="text-[#7d5a39] mt-2 text-base md:text-lg font-light">
+            Elevate Your Style
+          </p>
+          <div className="mt-12 w-full flex flex-col md:flex-row items-center justify-center gap-10">
+            {/* Left: Elegant woman portrait */}
+            <div className="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center">
+              <img
+                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=facearea&w=500&h=600&q=80"
+                alt="Elegant woman wearing jewellery"
+                className="object-cover rounded-lg shadow-lg w-[320px] h-[360px]"
+                style={{ background: "#ede9e5" }}
               />
-              <motion.textarea
-                name="message"
-                placeholder="Your Message"
-                rows={4}
-                required
-                style={{
-                  background: "#232329",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "8px",
-                  padding: "13px 18px",
-                  fontSize: "1rem",
-                  outline: "none",
-                  resize: "vertical",
-                  boxShadow: "0 1px 4px rgba(30,33,40,0.10)",
-                }}
-                variants={fadeIn}
-                initial="hidden"
-                animate={contactInView ? "visible" : "hidden"}
-                transition={{ delay: 0.66 }}
-                whileFocus={{ boxShadow: "0 2px 8px #6662" }}
-              />
-              <motion.button
-                type="submit"
-                style={{
-                  background: "linear-gradient(90deg, #444 0%, #232329 100%)",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "8px",
-                  padding: "12px 0",
-                  fontWeight: 600,
-                  fontSize: "1rem",
-                  letterSpacing: "0.5px",
-                  cursor: "pointer",
-                  transition: "background 0.18s",
-                }}
-                variants={fadeIn}
-                initial="hidden"
-                animate={contactInView ? "visible" : "hidden"}
-                transition={{ delay: 0.74 }}
-                whileHover={{ background: "#1a1a1d", scale: 1.04 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Send Message
-              </motion.button>
-            </motion.form>
-            <motion.div
-              style={{
-                marginTop: "16px",
-                color: "#666",
-                fontSize: "0.9rem",
-              }}
-              initial={{ opacity: 0, y: 12 }}
-              animate={contactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-              transition={{ delay: 0.85, duration: 0.5 }}
-            >
-              Or email us at <a href="mailto:support@thejhankar.com" style={{ color: "#bbb", textDecoration: "underline" }}>support@thejhankar.com</a>
-            </motion.div>
-          </motion.div>
-        </motion.section>
-      </motion.div>
+            </div>
+            {/* Right: Two jewelry product images */}
+            <div className="w-full md:w-2/3 flex items-center justify-center gap-6">
+              <div className="flex flex-col items-center gap-4">
+                <img
+                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=220&q=80"
+                  alt="Gold necklace with green jewel"
+                  className="object-cover rounded-lg shadow-md w-[170px] h-[250px] bg-[#f8f7f2]"
+                />
+              </div>
+              <div className="flex flex-col items-center gap-4">
+                <img
+                  src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=220&q=80"
+                  alt="Pear drop gold necklace"
+                  className="object-cover rounded-lg shadow-md w-[170px] h-[250px] bg-[#f8f7f2]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }
