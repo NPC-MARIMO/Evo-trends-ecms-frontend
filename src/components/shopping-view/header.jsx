@@ -1,4 +1,4 @@
-import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
+import { LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
 import {
   Link,
   useLocation,
@@ -23,6 +23,7 @@ import UserCartWrapper from "./cart-wrapper";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
+import LogoImg from "../../assets/logo.jpg"
 
 // Custom CSS for the enhanced design
 const customStyles = `
@@ -254,8 +255,13 @@ function ShoppingHeader() {
           to="/shop/home" 
           className="flex items-center gap-3 group"
         >
-          <div className="p-2 rounded-xl bg-gradient-to-br from-[#312E81] to-[#4F46E5] group-hover:from-[#B38A69] group-hover:to-[#312E81] transition-all duration-300">
-            <HousePlug className="h-5 w-5 text-white" />
+          <div className=" rounded-xl bg-gradient-to-br from-[#312E81] to-[#4F46E5] group-hover:from-[#B38A69] group-hover:to-[#312E81] transition-all duration-300 flex items-center justify-center">
+            <img
+              src={LogoImg}
+              alt="Jhankaar Logo"
+              className="h-10 w-10 object-cover rounded-lg shadow-md"
+              style={{ background: "#fff" }}
+            />
           </div>
           <span className="font-bold text-xl bg-gradient-to-r from-[#312E81] to-[#B38A69] bg-clip-text text-transparent">
             Jhankaar
@@ -281,8 +287,13 @@ function ShoppingHeader() {
             <div className="flex flex-col h-full pt-8">
               {/* Mobile Logo */}
               <div className="flex items-center gap-3 mb-8 px-4">
-                <div className="p-2 rounded-xl bg-gradient-to-br from-[#312E81] to-[#4F46E5]">
-                  <HousePlug className="h-5 w-5 text-white" />
+                <div className="p-2 rounded-xl bg-gradient-to-br from-[#312E81] to-[#4F46E5] flex items-center justify-center">
+                  <img
+                    src={LogoImg}
+                    alt="Jhankaar Logo"
+                    className="h-6 w-6 object-cover rounded-lg shadow-md"
+                    style={{ background: "#fff" }}
+                  />
                 </div>
                 <span className="font-bold text-xl text-[#312E81]">Jhankaar</span>
               </div>

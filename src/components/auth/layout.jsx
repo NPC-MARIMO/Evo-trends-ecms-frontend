@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Gem } from 'lucide-react';
 import { Link, Outlet } from 'react-router-dom';
+import Logoimg from '../../assets/logo.jpg'
 
 // Main Login Layout Component
 const AuthLayout = () => {
@@ -21,7 +22,12 @@ const AuthLayout = () => {
               className="flex items-center justify-center lg:justify-start mb-8"
               whileHover={{ scale: 1.05 }}
             >
-              <Gem className="text-[#B38A69] w-12 h-12 mr-3" />
+              <img
+                src={Logoimg}
+                alt="Jhankaar Logo"
+                className="w-12 h-12 mr-3 object-cover rounded-lg shadow-md"
+                style={{ background: "#fff" }}
+              />
               <h1 className="text-4xl font-light tracking-widest text-indigo-800">
                 THE<span className="text-[#B38A69]">JHANKAAR</span>
               </h1>
